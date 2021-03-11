@@ -16,4 +16,16 @@ do
     riscv64-unknown-elf-ar crs bin/riscv64${ext}-unknown-none-elf.a bin/$crate.o
 done
 
+for ext in imafc
+do
+    riscv64-unknown-elf-gcc -ggdb3 -fdebug-prefix-map=$(pwd)=/riscv-rt -c -mabi=ilp32f -march=rv32${ext} asm.S -o bin/$crate.o
+    riscv64-unknown-elf-ar crs bin/riscv32${ext}-unknown-none-elf.a bin/$crate.o
+done
+
+for ext in gc
+do
+    riscv64-unknown-elf-gcc -ggdb3 -fdebug-prefix-map=$(pwd)=/riscv-rt -c -mabi=ilp32d -march=rv32${ext} asm.S -o bin/$crate.o
+    riscv64-unknown-elf-ar crs bin/riscv32${ext}-unknown-none-elf.a bin/$crate.o
+done
+
 rm bin/$crate.o
