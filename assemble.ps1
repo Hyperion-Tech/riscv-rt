@@ -5,14 +5,14 @@ Remove-Item -Force bin/*.a
 
 $crate = "riscv-rt"
 
-$extension_sets = @("i", "im", "ic", "imc", "if", "ifc", "imf", "imfc", "ifd", "ifdc", "imfd", "imfdc")
+$extension_sets = @("i", "im", "ic", "imc", "if", "ifc", "imf", "imfc", "ifd", "ifdc", "imfd", "imfdc", "imafc", "gc")
 
 $pwd = Get-Location
 
 foreach ($ext in $extension_sets)
 {
     $abi = ""
-    if ($ext.contains("d"))
+    if ($ext.contains("d") || $ext == "gc")
         {$abi = "d"}
     elseif ($ext.contains("f"))
         {$abi = "f"}
